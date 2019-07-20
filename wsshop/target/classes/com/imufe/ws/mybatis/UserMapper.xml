@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imufe.ws.mybatis.UserMapper">
+    <select id="findById" parameterType="int" resultType="com.imufe.ws.pojo.User">
+        select * from ws_user where id=#{id}
+    </select>
+    <insert id="insertUser" parameterType="com.imufe.ws.pojo.User">
+        INSERT INTO `wsshop`.`ws_user` (
+                  `username`,
+                  `password`,
+                  `role`,
+                  `create_time`,
+                  `update_time`
+                ) 
+                VALUES
+                  ( 
+                    #{username},
+                    #{password},
+                    #{role},
+                    #{create_time},
+                    #{update_time}
+                  ) ;
+    </insert>
+    <delete id="deleteById" parameterType="int" >
+        delete from ws_user where id=#{id}
+    </delete>
+    <update id="updataById" parameterType="com.imufe.ws.pojo.User">
+        UPDATE 
+		  `wsshop`.`ws_user` 
+		SET
+		  `username` = #{username},
+		  `password` = #{password},
+		  `update_time` = #{update_time} 
+		WHERE `id` = #{id} ;        
+    </update>
+</mapper>

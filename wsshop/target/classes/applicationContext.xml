@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+
+	
+	<bean id="myAspect" class="com.imufe.ws.service.AspectLearn"></bean>	
+    <bean id="userService" class="com.imufe.ws.service.UserServiceImpl">
+    
+        
+        <property name="username" value="zhangfei"></property>
+        <property name="list">
+            <list>
+                <value>aaa</value>
+                <value>bbb</value>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>宝马</value>
+                <value>奥迪</value>
+                <value>奔驰</value>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="username" value="赵云"></entry>
+                <entry key="passowrd" value="987"></entry>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="username">12344</prop>
+                <prop key="password">44321</prop>
+            </props>
+        </property>
+        <property name="members">
+            <array>
+                <value>父亲</value>
+                <value>母亲</value>
+                <value>子</value>
+                <value>女</value>
+            </array>
+        </property> 
+    </bean>
+    <aop:config>
+          <aop:aspect ref="myAspect">
+              <aop:pointcut expression="execution(* com.imufe.ws.service.*.*(..))" id="myPoint"/>
+               <aop:before method="myBefore" pointcut-ref="myPoint"/> 
+          </aop:aspect>
+    </aop:config>
+    
+    <!-- <context:component-scan base-package="com.imufe.ws.service"></context:component-scan> -->
+    
+</beans>
